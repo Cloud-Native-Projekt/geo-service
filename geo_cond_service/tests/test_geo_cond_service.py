@@ -8,7 +8,7 @@ client = TestClient(app)
 
 def test_geo_evaluate_success():
     payload = {
-        "lon": 7.8325,
+        "lng": 7.8325,
         "lat": 49.1508,
         "radius_km": 3,
         "geo_cond_id": 1,

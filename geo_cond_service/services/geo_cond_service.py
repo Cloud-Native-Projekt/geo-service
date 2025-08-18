@@ -16,7 +16,7 @@ class GeoCondService():
         """Fetch GeoCond data and return as GeoCondResult."""
         power: GeoCondResultPower = await self.geo_cond_repository.query_power_infrastructure(
             lat=req.lat,
-            lon=req.lng,
+            ln=req.lng,
             radius=req.radius
         )
         if not power:
