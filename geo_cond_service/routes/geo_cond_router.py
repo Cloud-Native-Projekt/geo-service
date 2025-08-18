@@ -7,6 +7,7 @@ from geo_cond_service.services.geo_cond_service import GeoCondService
 router = APIRouter()
 
 
-@router.post("/geo-cond", status_code=200)
-async def geo_cond_endpoint(geo_cond: GeoCond, geo_cond_service: GeoCondService = Depends(get_geo_cond_service)):
-    return await geo_cond_service.get_geo_conditions(geo_cond)
+@router.get("/geo/power", status_code=200)
+async def geo_cond_power_endpoint(lat: float, lng: float, radius: int, geo_cond_service: GeoCondService = Depends(get_geo_cond_service)):
+    geo_cond = GeoCond(lat=lat, lng=lng, radius=radius)
+    return await geo_cond_service.get_power(geo_cond)

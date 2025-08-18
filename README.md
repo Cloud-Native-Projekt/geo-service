@@ -1,6 +1,7 @@
-# microservices-app
-Repository for all components of the microservices app
+# geo-service-app
 
+Repository for all components of the geo app.
+Service for reviewing infrastructure such as power lines and land use (forests, buildings, existing wind/solar power plants, etc.) within a specific radius
 
 ## Getting started
 
