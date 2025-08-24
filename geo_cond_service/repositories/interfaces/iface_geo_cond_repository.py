@@ -1,23 +1,22 @@
-import math
 from abc import ABC, abstractmethod
-from typing import Any
 
-from geojson import FeatureCollection
-from shapely.geometry import Point, shape
-
-from geo_cond_service.schemas.geo_cond_schemas import GeoCond, GeoCondResultPower
+import geo_cond_service.schemas.geo_cond_schemas as schemas
 
 
 class GeoCondRepositoryInterface(ABC):
 
 	@abstractmethod
-	async def query_power_infrastructure(self, lat: float, lng: float, radius: int) -> GeoCondResultPower:
+	async def get_power_infrastructure(self, lat: float, lng: float, radius: int) -> schemas.GeoCondResultPower:
 		pass
 
 	@abstractmethod
-	async def check_protected_area(self, lat: float, lng: int) -> Any:
+	async def get_protected_areas(self, lat: float, lng: int, radius: int) -> schemas.GeoCondResultProtection:
 		pass	
 
 	@abstractmethod
-	async def check_is_area_used(self, lat: float, lng: float, radius: int) -> Any:
-		pass	
+	async def get_buildings_in_area(self, lat: float, lng: float, radius: int) -> schemas.GeoCondResultBuildings:
+		pass
+
+	@abstractmethod
+	async def get_forest_overlap(self, lat: float, lng: float, radius: int) -> schemas.GeoCondResultForest:
+		pass
