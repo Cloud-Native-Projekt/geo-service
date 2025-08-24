@@ -16,10 +16,9 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --no-install-project --no-dev
 
-ADD ./geo_cond_service /app/geo_cond_service
-ADD ./shared /app/shared
-ADD ./pyproject.toml /app
-ADD ./uv.lock /app
+COPY ./geo_service /app/geo_service
+COPY ./pyproject.toml /app
+COPY ./uv.lock /app
 
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
@@ -37,4 +36,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 ENV PYTHONPATH="/app"
 
 # Default prod command (no reload)
-CMD ["uvicorn", "geo_cond_service.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "geo_service.main:app", "--host", "0.0.0.0", "--port", "8000"]

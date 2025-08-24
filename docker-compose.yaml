@@ -3,12 +3,12 @@
 ## https://github.com/astral-sh/uv-docker-example/blob/main/compose.yml
 
 services:
-    geo_cond_service:
-        container_name: geo_cond_service
+    geo_service:
+        container_name: geo_service
         # Build the image from the Dockerfile in the current directory
         build:
             context: .
-            dockerfile: geo_cond_service/Dockerfile
+            dockerfile: geo_service/Dockerfile
         ports:
             - "8000:8000" # Host the FastAPI application on port 8000
         networks:

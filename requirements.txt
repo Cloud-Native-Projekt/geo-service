@@ -1,9 +1,0 @@
-fastapi
-pytest
-httpx
-requests
-shapely
-geopandas
-sqlalchemy
-geoalchemy2
-geojson
