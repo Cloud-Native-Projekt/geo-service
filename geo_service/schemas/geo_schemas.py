@@ -8,8 +8,8 @@ class GeoCond(BaseModel):
 
 
 class ResultPower(BaseModel):
-    near_powerline: bool
-    has_substation: bool
+    nearest_substation_distance_m: float
+    nearest_powerline_distance_m: float
 
 
 class ResultProtection(BaseModel):

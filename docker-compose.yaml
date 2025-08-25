@@ -6,6 +6,12 @@ services:
     geo_service:
         container_name: geo_service
         # Build the image from the Dockerfile in the current directory
+        environment:
+            DATABASE_URL: postgresql+asyncpg://geo_user:geo_pass@postgis_db:5432/geo
+            TEST_DATABASE_URL: postgresql+asyncpg://geo_user:geo_pass@postgis_db:5432/geo_test
+        depends_on:
+            postgis_db:
+                condition: service_healthy
         build:
             context: .
             dockerfile: geo_service/Dockerfile
@@ -28,6 +34,24 @@ services:
                 # Rebuild the image if dependencies change by checking uv.lock
                 - action: rebuild
                   path: ./uv.lock
+    postgis_db:
+        image: postgis/postgis:15-3.4
+        container_name: geo_postgres
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: geo
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgis_data:/var/lib/postgresql/data
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 5s
+            retries: 5
+
+volumes:
+    postgis_data:
 networks:
     microservices_network:
         name: microservices_network

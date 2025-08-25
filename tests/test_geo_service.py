@@ -1,6 +1,3 @@
-import sys
-from pathlib import Path
-
 from fastapi.testclient import TestClient
 
 from geo_service.main import app
@@ -23,8 +20,8 @@ def test_get_power_infrastructure():
     data = response.json()
 
     expected_keys = [
-        "near_powerline",
-        "has_substation",
+        "nearest_substation_distance_m",
+        "nearest_powerline_distance_m",
     ]
     for key in expected_keys:
         assert key in data
