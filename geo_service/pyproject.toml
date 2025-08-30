@@ -15,5 +15,7 @@ dependencies = [
 "pytest-asyncio>=0.22.0",
 "geoalchemy2>=0.14.4",
 "asyncpg>=0.30.0",
-"sqlalchemy>=2.0.32",
+"SQLAlchemy>=2.0.32",
+"psycopg2-binary>=2.9.5",
+"databases[postgresql]>=0.6.2",
 ]

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from geo_service.dependencies import get_geo_service
 from geo_service.schemas.geo_schemas import GeoCond
@@ -23,10 +23,10 @@ async def geo_protection_endpoint(
     lat: float,
     lng: float,
     radius: int,
-    geo_cond_service: GeoService = Depends(get_geo_service),
+    geo_service: GeoService = Depends(get_geo_service),
 ):
     geo_cond = GeoCond(lat=lat, lng=lng, radius=radius)
-    return await geo_cond_service.get_protected_areas(geo_cond)
+    return await geo_service.get_protected_areas(geo_cond)
 
 
 @router.get("/geo/forest", status_code=200)

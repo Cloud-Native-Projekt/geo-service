@@ -20,7 +20,6 @@ class GeoService:
         )
         if not power:
             raise ValueError("Power infrastructure data not found")
-
         return power
 
     async def get_protected_areas(self, req: GeoCond) -> ResultProtection:
