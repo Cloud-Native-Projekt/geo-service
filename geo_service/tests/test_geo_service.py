@@ -1,8 +1,12 @@
-test_params = {
+params_protected_area = {
     "lng": 7.8325,
-    "lat": 49.1508,
-    "radius": 3000,
+    "lat": 49.1508
 }
+params_in_forest = {
+    "lng": 7.8325,
+    "lat": 49.1508
+}
+
 
 def test_get_power_infrastructure(test_app):
     response = test_app.get("/geo/power", params=test_params)

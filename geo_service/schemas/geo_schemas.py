@@ -4,7 +4,6 @@ from pydantic import BaseModel
 class GeoCond(BaseModel):
     lat: float
     lng: float
-    radius: int
 
 
 class ResultPower(BaseModel):
@@ -14,12 +13,14 @@ class ResultPower(BaseModel):
 
 class ResultProtection(BaseModel):
     in_protected_area: bool
+    designation: str = None
 
 
 class ResultForest(BaseModel):
-    forest_coverage_percent: float
+    type: str = None
+    in_forest: bool
 
 
 class ResultBuildings(BaseModel):
-    urban_building_density: float
-    on_existing_building: bool
+    in_populated_area: bool = None
+    

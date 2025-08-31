@@ -1,7 +1,7 @@
 [project]
 name = "geo-service-app"
 version = "0.1.0"
-description = "Service for reviewing infrastructure such as power lines and land use (forests, buildings, existing wind/solar power plants, etc.) within a specific radius."
+description = "Service for reviewing infrastructure such as power lines and land use (forests, buildings, existing wind/solar power plants, etc.)."
 readme = "README.md"
 requires-python = ">=3.13"
 

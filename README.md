@@ -18,9 +18,10 @@ For production run `docker compose up -d` to start the containers in detached mo
  (or if error: `uv sync --allow-insecure-host github.com --allow-insecure-host pypi.org --allow-insecure-host files.pythonhosted.org`)
  
  # check db
- docker compose exec db psql --username=hello_fastapi --dbname=hello_fastapi_dev
+ docker compose exec test_db psql --username=hello_fastapi --dbname=hello_fastapi_dev
  - List all tables: `\l`
  - Connect to database: `\c hello_fastapi_dev`
  - list relations: `\dt`
  - show specific table: SELECT * FROM your_table_name;
  SELECT * FROM power_lines;
+ - to leave: `\q`

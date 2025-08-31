@@ -19,7 +19,11 @@ services:
     volumes:
       - ./src/:/geo_data_service/app/data
     environment:
-      - DATABASE_URL=postgresql+asyncpg://hello_fastapi:hello_fastapi@geo_test_db:5432/hello_fastapi_dev
+      - POSTGRES_USER=hello_fastapi
+      - POSTGRES_PASSWORD=hello_fastapi
+      - POSTGRES_DB=hello_fastapi_dev
+      - POSTGRES_HOST=geo_test_db
+      - POSTGRES_PORT=5432
     depends_on:
       - test_db 
   geo_service:
@@ -28,7 +32,13 @@ services:
       context: .
       dockerfile: geo_service/Dockerfile
     volumes:
-      - ./src/:/geo_service/app/
+      - ./src/:/geo_service/app/data
+    environment:
+      - POSTGRES_USER=hello_fastapi
+      - POSTGRES_PASSWORD=hello_fastapi
+      - POSTGRES_DB=hello_fastapi_dev
+      - POSTGRES_HOST=geo_test_db
+      - POSTGRES_PORT=5432
     ports:
       - "8000:8000"
     depends_on:
