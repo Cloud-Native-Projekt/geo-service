@@ -18,4 +18,5 @@ dependencies = [
 "SQLAlchemy>=2.0.32",
 "psycopg2-binary>=2.9.5",
 "databases[postgresql]>=0.6.2",
+"postgis"
 ]

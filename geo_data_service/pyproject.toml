@@ -10,5 +10,7 @@ dependencies = [
     "uvicorn>=0.35.0",
     "geoalchemy2>=0.14.4",
     "asyncpg>=0.30.0",
-    "SQLAlchemy>=2.0.32"
+    "SQLAlchemy>=2.0.32",
+    "OSMPythonTools>=0.3.3",
+    "plpygis"
 ]

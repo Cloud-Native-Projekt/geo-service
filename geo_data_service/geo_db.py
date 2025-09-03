@@ -8,6 +8,9 @@ from geoalchemy2 import WKTElement
 from geo_data_service.geo_models import Base, Substation, PowerLine, ProtectedArea, Forests, Building
 import requests
 import asyncpg
+from OSMPythonTools.nominatim import Nominatim
+from OSMPythonTools.overpass import Overpass, overpassQueryBuilder
+from plpygis import Geometry
 
 requests.packages.urllib3.disable_warnings()
 OVERPASS_URL = "https://overpass-api.de/api/interpreter"
@@ -30,6 +33,7 @@ class GeoDB:
         self.logger = logging.getLogger(self.__class__.__name__)
         self.__engine = create_async_engine(f"postgresql+asyncpg://{self.__USER}:{self.__PASSWORD}@{self.__HOST}:{self.__PORT}/{self.__DATABASE}")
         self.SessionLocal = sessionmaker(bind=self.__engine, class_=AsyncSession, expire_on_commit=False)
+        self.overpass = Overpass()
         
         
     def extract_coordinates_from_way(self, way):
@@ -137,18 +141,37 @@ class GeoDB:
         )
 
     async def fill_table_protected_areas(self) -> None:
-        self.logger.info("Filling protected_areas table...")
+        nominatim = Nominatim()
+        areaId = nominatim.query("Bavaria, Germany").areaId()
+        query = overpassQueryBuilder(
+        area=areaId,
+        elementType=["way", "relation"],
+        selector='"boundary"="protected_area"',
+        includeGeometry=True,
+        )
+        result = self.overpass.query(query)
+        async with self.SessionLocal() as session:
+            for el in result.elements():
+                try:
+                    geo_json = el.geometry()
+                    geom = Geometry.from_geojson(geo_json)
+                    print(f"OSM ID {el.id} and designation {el.tags().get('protection_title')}")
+                    session.add(ProtectedArea(osm_id=el.id(), geom=geom.wkt, designation=el.tags().get("protection_title")))
+                    await session.commit()
+                    print(f"Inserted protected area with OSM ID {el.id()} and designation {el.tags().get('protection_title')}")
+                except Exception as e:
+                    self.logger.error(f"Error processing element {el.id}: {e}")
+
+        """self.logger.info("Filling protected_areas table...")
         await self._fill_table(
             BUNDESLAENDER,
-            """
-            [out:json][timeout:25];
-            area[name="{name}"];
-            way["boundary"="protected_area"](area);
-            rel["boundary"="protected_area"](area);
-            out geom;
-            """,
+         [#out:json][timeout:25];
+          #  area[name="{name}"];
+          #  way["boundary"="protected_area"](area);
+          #  rel["boundary"="protected_area"](area);
+          #  out geom;
             self._process_protected_area       
-        )
+        )"""
 
     async def fill_table_forests(self) -> None:
         self.logger.info("Filling forest table...")
@@ -254,11 +277,11 @@ class GeoDB:
         """
         Fill all tables with data from Overpass API.
         """
-        await self.fill_table_substations()
-        await self.fill_table_power_lines()
+        #await self.fill_table_substations()
+       # await self.fill_table_power_lines()
         await self.fill_table_protected_areas()
-        await self.fill_table_forests()
-        await self.fill_table_buildings()
+       # await self.fill_table_forests()
+       # await self.fill_table_buildings()
 
     async def create_tables(self) -> None:
         """

@@ -25,7 +25,7 @@ class ProtectedArea(Base):
     id = Column(BigInteger, primary_key=True, index=True)
     osm_id = Column(BigInteger, nullable=False)
     designation = Column(String, nullable=True)
-    geom = Column(Geometry("MultiPolygon", srid=4326), nullable=False)
+    geom = Column(Geometry(srid=4326), nullable=False)
 
 
 class Forests(Base):

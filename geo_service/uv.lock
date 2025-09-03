@@ -142,6 +142,7 @@ dependencies = [
     { name = "fastapi" },
     { name = "geoalchemy2" },
     { name = "httpx" },
+    { name = "postgis" },
     { name = "psycopg2-binary" },
     { name = "pydantic" },
     { name = "pytest" },
@@ -158,6 +159,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.116.1" },
     { name = "geoalchemy2", specifier = ">=0.14.4" },
     { name = "httpx", specifier = ">=0.24.0" },
+    { name = "postgis" },
     { name = "psycopg2-binary", specifier = ">=2.9.5" },
     { name = "pydantic", specifier = ">=2.11.7" },
     { name = "pytest", specifier = ">=7.4.0" },
@@ -275,6 +277,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f9/e2/3e91f31a7d2b083fe6ef3fa267035b518369d9511ffab804f839851d2779/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3", size = 69412, upload-time = "2025-05-15T12:30:07.975Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", size = 20538, upload-time = "2025-05-15T12:30:06.134Z" },
+]
+
+[[package]]
+name = "postgis"
+version = "1.0.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/93/09/6edfb7bda8b6645de68c232709aaf11ac2a945ced37ebb69e513d9dc01e5/postgis-1.0.4.tar.gz", hash = "sha256:3d41f087e249a2a8b6720931e6f8f22b7747801f250265a8b8ac5f9d48221e63", size = 51997, upload-time = "2017-08-25T15:17:37.888Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fe/e1/522b5e0f9c0edf8bf864ce80a060d7c3a87d88070bfb2640a70eb0b006b0/postgis-1.0.4-py3-none-any.whl", hash = "sha256:1dfa62d33c585d68a54bdd47c21bdcb9302f9cbb0ef5aec360e64d2c3e0e1a93", size = 63673, upload-time = "2017-08-25T15:17:40.224Z" },
 ]
 
 [[package]]

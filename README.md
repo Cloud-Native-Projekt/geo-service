@@ -23,5 +23,6 @@ For production run `docker compose up -d` to start the containers in detached mo
  - Connect to database: `\c hello_fastapi_dev`
  - list relations: `\dt`
  - show specific table: SELECT * FROM your_table_name;
+ - show specific table: SELECT * FROM protected_areas LIMIT 10;
  SELECT * FROM power_lines;
  - to leave: `\q`
